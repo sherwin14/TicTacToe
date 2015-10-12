@@ -52,9 +52,6 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-               /* if (view) {
-                    return;
-                } */
                 ImageView imageView = ((GridViewAdapter.ViewHolder) view.getTag()).img;
 /*
 
@@ -96,6 +93,31 @@ public class MainActivity extends ActionBarActivity {
                         } else if (game.getAttacker() == Game.Player.O) {
                             you.setText((Integer.parseInt(you.getText().toString()) + 1) + "");
                         }
+                        game.InitBoard();
+                    }else if(game.isDraw()){
+                        new SweetAlertDialog(MainActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                                .setTitleText("Game Draw!")
+                                .setContentText("Play Again?")
+                                .setConfirmText("Yes")
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog) {
+                                        refreshBoard();
+                                        sDialog
+                                                .setTitleText(game.getAttacker() + " Your turn!")
+                                                .setConfirmText("OK")
+                                                .setConfirmClickListener(null);
+                                    }
+                                })
+                                .setCancelText("No")
+                                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                        sweetAlertDialog
+                                                .setTitleText("Tictactoe is now closing");
+                                    }
+                                })
+                                .show();
                         game.InitBoard();
                     }
                 }

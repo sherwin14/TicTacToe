@@ -64,6 +64,20 @@ public class Game{
         return false;
     }
 
+    public boolean isDraw(){
+        int ctr =0 ;
+        for(Player player: Board){
+            if(player != Player.S ){
+                ctr++;
+            }
+        }
+
+        if(ctr==9){
+            return true;
+        }
+        return false;
+    }
+
     private boolean checkStraight(){
 
         if(Board.get(0) == Board.get(1) && Board.get(0) == Board.get(2)){
@@ -112,5 +126,9 @@ public class Game{
             }
         }
         return false;
+    }
+
+    private void minimax(){
+
     }
 }
