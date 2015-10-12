@@ -37,11 +37,13 @@ public class MainActivity extends ActionBarActivity {
                 game.setAttacker(Game.Player.X);
 
                 Random firstmove = new Random();
+                Log.d("move", "" + firstmove.nextInt(8));
 
 
+                for(int move: game.getAvailableMoves()){
+                    Log.d("move1","" + move);
+                }
 
-               Log.d("move", "" + firstmove.nextInt(8));
-                Log.d("move1","" + game.chooseMove());
             }
         });
         builder.setNegativeButton("You (O)", new DialogInterface.OnClickListener() {
@@ -61,7 +63,7 @@ public class MainActivity extends ActionBarActivity {
         gridViewPlayer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+               // gridViewPlayer.performItemClick(view,i,l);
                 ImageView imageView = ((GridViewAdapter.ViewHolder) view.getTag()).img;
 /*
 
@@ -123,10 +125,13 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                // game.ShowBoard();
-                refreshBoard();
+               /* refreshBoard();
                 game.InitBoard();
                 opp.setText("0");
-                you.setText("0");
+                you.setText("0");*/
+                for(int move: game.getAvailableMoves()){
+                    Log.d("move1","" + move);
+                }
             }
         });
 

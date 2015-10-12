@@ -57,6 +57,13 @@ public class Game{
         S //Panggulo
     }
 
+    public boolean isGameOver(){
+        if(checkStraight() || checkDiagonal() || isDraw()){
+            return true;
+        }
+        return false;
+    }
+
     public boolean Won(){
         if(checkStraight() || checkDiagonal()){
            return true;
@@ -128,21 +135,25 @@ public class Game{
         return false;
     }
 
-    private void minimax(int depth){
+    private void minimax(int depth,Player player){
         int min= -1;
         int max= 1;
 
-    
+        if(depth ==0 || getAvailableMoves().size() == 0){
+        }
     }
 
-    private int getAvailableMoves(){
-        int i=0;
+    public ArrayList<Integer> getAvailableMoves(){
+        ArrayList<Integer> availableCells = new ArrayList<>();
+
+        int ctr=0;
         for(Player player: Board){
-            if(player == Player.S ){
-                i++;
+            if(player == Player.S){
+                availableCells.add(ctr);
             }
+            ctr++;
         }
-        return i;
+        return availableCells;
     }
 
     public int chooseMove(){
