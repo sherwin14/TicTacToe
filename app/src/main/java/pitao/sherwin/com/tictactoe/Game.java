@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Android on 10/6/2015.
@@ -149,7 +150,7 @@ public class Game{
     private int minimax(int depth,Player player){
         int min= -1;
         int max= 1;
-
+        ArrayList<Integer> scores= new ArrayList<>();
         if(depth ==0 || getAvailableMoves().size() == 0){
 
         }else{
@@ -159,16 +160,46 @@ public class Game{
                 if(player == Player.X){
                   setValueOnBoard(cell,player);
                   int score = minimax(depth + 1,Player.O);
+                  scores.add(score);
                 }else if (player == Player.O){
-
+                    setValueOnBoard(cell,player);
+                    scores.add(minimax(depth + 1,Player.X));
                 }
                 refreshTempBoard();
             }
         }
 
-        return 0;
+        return (player == Player.X) ? getMax(scores):getMin(scores);
     }
 
+    private int getMin(ArrayList<Integer> cells){
+        int min = Integer.MAX_VALUE;
+        int index = 0;
+        int ctr=0;
+        for(Integer cell: cells){
+            if(cell < min){
+                min = cell;
+                index = ctr;
+            }
+            ctr++;
+        }
+        return index;
+    }
+
+    private int getMax(ArrayList<Integer> cells){
+
+        int max = Integer.MIN_VALUE;
+        int index =0;
+        int ctr=0;
+        for(Integer cell: cells){
+            if(cell > max){
+                max = cell;
+                index = ctr;
+            }
+            ctr++;
+        }
+        return index;
+    }
     public ArrayList<Integer> getAvailableMoves(){
         ArrayList<Integer> availableCells = new ArrayList<>();
 
