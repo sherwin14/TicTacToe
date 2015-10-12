@@ -30,6 +30,10 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         you = (TextView) findViewById(R.id.txtyou);
         opp = (TextView) findViewById(R.id.txtopp);
+
+        gridViewPlayer = (GridView) findViewById(R.id.gridView);
+        refreshBoard();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
         builder.setPositiveButton("Computer (X)", new DialogInterface.OnClickListener() {
@@ -37,12 +41,14 @@ public class MainActivity extends ActionBarActivity {
                 game.setAttacker(Game.Player.X);
 
                 Random firstmove = new Random();
-                Log.d("move", "" + firstmove.nextInt(8));
 
+                int genMove = firstmove.nextInt(8);
+                Log.d("move", "" + genMove);
+                gridViewPlayer.performItemClick(gridViewPlayer.getChildAt(genMove),genMove,gridViewPlayer.getItemIdAtPosition(genMove));
 
-                for(int move: game.getAvailableMoves()){
+              /*  for(int move: game.getAvailableMoves()){
                     Log.d("move1","" + move);
-                }
+                }*/
 
             }
         });
@@ -57,8 +63,7 @@ public class MainActivity extends ActionBarActivity {
         dialog.setMessage("Who Starts?");
         dialog.show();
 
-        gridViewPlayer = (GridView) findViewById(R.id.gridView);
-        refreshBoard();
+
 
         gridViewPlayer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

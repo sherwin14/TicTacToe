@@ -12,6 +12,16 @@ import java.util.ArrayList;
 public class Game{
 
     public Player Attacker;
+    private ArrayList<Player> Board = new ArrayList<>();
+    private ArrayList<Player> tempBoard = new ArrayList<>();
+
+    public enum Player
+    {
+        X,
+        O,
+        S //Panggulo
+    }
+
     public Game(){
         InitBoard();
     }
@@ -47,14 +57,6 @@ public class Game{
     public void ShowBoard(){
             System.out.print(Board);
             Log.d("Board",Board.toString());
-    }
-    private ArrayList<Player> Board = new ArrayList<>();
-
-    public enum Player
-    {
-        X,
-        O,
-        S //Panggulo
     }
 
     public boolean isGameOver(){
@@ -135,12 +137,36 @@ public class Game{
         return false;
     }
 
-    private void minimax(int depth,Player player){
+    private void refreshTempBoard(){
+        tempBoard.clear();
+        tempBoard = Board;
+    }
+
+    private void setValueOnBoard(int index,Player player){
+        tempBoard.add(index,player);
+    }
+
+    private int minimax(int depth,Player player){
         int min= -1;
         int max= 1;
 
         if(depth ==0 || getAvailableMoves().size() == 0){
+
+        }else{
+            for(int i=0;i<getAvailableMoves().size();i++){
+             Integer cell = getAvailableMoves().get(i);
+
+                if(player == Player.X){
+                  setValueOnBoard(cell,player);
+                  int score = minimax(depth + 1,Player.O);
+                }else if (player == Player.O){
+
+                }
+                refreshTempBoard();
+            }
         }
+
+        return 0;
     }
 
     public ArrayList<Integer> getAvailableMoves(){
