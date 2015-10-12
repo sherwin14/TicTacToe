@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Random;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -32,6 +35,13 @@ public class MainActivity extends ActionBarActivity {
         builder.setPositiveButton("Computer (X)", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 game.setAttacker(Game.Player.X);
+
+                Random firstmove = new Random();
+
+
+
+               Log.d("move", "" + firstmove.nextInt(8));
+                Log.d("move1","" + game.chooseMove());
             }
         });
         builder.setNegativeButton("You (O)", new DialogInterface.OnClickListener() {
@@ -79,14 +89,6 @@ public class MainActivity extends ActionBarActivity {
                                                 .setConfirmClickListener(null);
                                     }
                                 })
-                                .setCancelText("No")
-                                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                    @Override
-                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                        sweetAlertDialog
-                                                .setTitleText("Tictactoe is now closing");
-                                    }
-                                })
                                 .show();
                         if (game.getAttacker() == Game.Player.X) {
                             opp.setText((Integer.parseInt(opp.getText().toString()) + 1) + "");
@@ -107,14 +109,6 @@ public class MainActivity extends ActionBarActivity {
                                                 .setTitleText(game.getAttacker() + " Your turn!")
                                                 .setConfirmText("OK")
                                                 .setConfirmClickListener(null);
-                                    }
-                                })
-                                .setCancelText("No")
-                                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                    @Override
-                                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                        sweetAlertDialog
-                                                .setTitleText("Tictactoe is now closing");
                                     }
                                 })
                                 .show();

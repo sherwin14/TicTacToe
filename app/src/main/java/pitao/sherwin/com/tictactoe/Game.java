@@ -128,7 +128,31 @@ public class Game{
         return false;
     }
 
-    private void minimax(){
+    private void minimax(int depth){
+        int min= -1;
+        int max= 1;
 
+    
+    }
+
+    private int getAvailableMoves(){
+        int i=0;
+        for(Player player: Board){
+            if(player == Player.S ){
+                i++;
+            }
+        }
+        return i;
+    }
+
+    public int chooseMove(){
+        int i=0;
+        for(Player player: Board){
+            if(player == Player.S ){
+               i++;
+                return i-1;
+            }
+        }
+        return 0;
     }
 }
